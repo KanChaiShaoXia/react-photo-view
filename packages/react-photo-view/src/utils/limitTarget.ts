@@ -7,6 +7,23 @@ export const limitNumber = (value: number, min: number, max: number) => {
 /**
  * 限制最大/最小缩放
  */
-export const limitScale = (scale: number, max: number = 0, buffer: number = 0) => {
-  return limitNumber(scale, minScale * (1 - buffer), Math.max(maxScale, max) * (1 + buffer));
+// export const limitScale = (scale: number, max: number = 0, buffer: number = 0) => {
+//   return limitNumber(scale, minScale * (1 - buffer), Math.max(maxScale, max) * (1 + buffer));
+// };
+
+/**
+ * 限制最大/最小缩放
+ */
+export const limitScale = (
+  scale: number,
+  isDragMode = false,
+  minDragScale = 0.1,
+  max: number = 0,
+  buffer: number = 0,
+) => {
+  return limitNumber(
+    scale,
+    isDragMode ? minDragScale : minScale * (1 - buffer),
+    Math.max(maxScale, max) * (1 + buffer),
+  );
 };

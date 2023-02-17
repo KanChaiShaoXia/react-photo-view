@@ -2,9 +2,9 @@
   "name": "root",
   "private": true,
   "description": "An exquisite React photo preview component",
-  "author": "MinJieLiu",
+  "author": "kanchaishaoxia",
   "license": "Apache-2.0",
-  "repository": "https://github.com/MinJieLiu/react-photo-view.git",
+  "repository": "https://github.com/kanchaishaoxia/react-photo-view.git",
   "scripts": {
     "dev": "pnpm -C ./packages/example dev",
     "build": "pnpm -C ./packages/react-photo-view build && pnpm -C ./packages/example build",

@@ -30,6 +30,10 @@ import Photo from './Photo';
 import './PhotoBox.less';
 
 export interface PhotoBoxProps {
+  /** 拖拽模式最小缩放 */
+  minDragScale?: number;
+  /** 拖拽模式 */
+  isDragMode?: boolean;
   // 图片信息
   item: DataType;
   // 是否可见
@@ -121,6 +125,8 @@ const initialState = {
 };
 
 export default function PhotoBox({
+  isDragMode = true,
+  minDragScale = 0.1,
   item: { src, render, width: customWidth = 0, height: customHeight = 0, originRef },
   visible,
   speed,
@@ -171,7 +177,7 @@ export default function PhotoBox({
   } = state;
 
   const fn = useMethods({
-    onScale: (current: number) => onScale(limitScale(current)),
+    onScale: (current: number) => onScale(limitScale(current, isDragMode, minDragScale)),
     onRotate(current: number) {
       if (rotate !== current) {
         expose({ rotate: current });
@@ -235,6 +241,8 @@ export default function PhotoBox({
         // 目标倍数
         const toScale = limitScale(
           scale + ((currentTouchLength - touchLength) / 100 / 2) * scale,
+          isDragMode,
+          minDragScale,
           naturalWidth / width,
           scaleBuffer,
         );
@@ -295,7 +303,7 @@ export default function PhotoBox({
         stopRaf: false,
         reach: undefined,
       });
-      const safeScale = limitScale(scale, naturalWidth / width);
+      const safeScale = limitScale(scale, isDragMode, minDragScale, naturalWidth / width);
       // Go
       slideToPosition(x, y, lastX, lastY, width, height, scale, safeScale, lastScale, rotate, touchTime);
 
@@ -381,7 +389,8 @@ export default function PhotoBox({
   function handleWheel(e: React.WheelEvent) {
     if (!reach) {
       // 限制最大倍数和最小倍数
-      const toScale = limitScale(scale - e.deltaY / 100 / 2, naturalWidth / width);
+      const delta = isDragMode ? e.deltaY / 100 / 16 : e.deltaY / 100 / 2;
+      const toScale = limitScale(scale - delta, isDragMode, minDragScale, naturalWidth / width);
       updateState({ stopRaf: true });
       onScale(toScale, e.clientX, e.clientY);
     }
