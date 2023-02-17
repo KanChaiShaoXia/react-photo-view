@@ -1,4 +1,4 @@
-import { maxScale, minScale } from '../variables';
+import { defaultMinDragScale, maxScale, minScale } from '../variables';
 
 export const limitNumber = (value: number, min: number, max: number) => {
   return Math.max(Math.min(value, max), min);
@@ -17,7 +17,7 @@ export const limitNumber = (value: number, min: number, max: number) => {
 export const limitScale = (
   scale: number,
   isDragMode = false,
-  minDragScale = 0.1,
+  minDragScale = defaultMinDragScale,
   max: number = 0,
   buffer: number = 0,
 ) => {

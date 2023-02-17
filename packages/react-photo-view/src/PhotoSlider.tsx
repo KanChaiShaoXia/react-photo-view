@@ -1,7 +1,14 @@
 import React, { useRef, useState } from 'react';
 import type { DataType, PhotoProviderBase, OverlayRenderProps } from './types';
 import type { ReachType } from './types';
-import { defaultEasing, defaultSpeed, defaultOpacity, horizontalOffset, maxMoveOffset } from './variables';
+import {
+  defaultEasing,
+  defaultSpeed,
+  defaultOpacity,
+  horizontalOffset,
+  maxMoveOffset,
+  defaultMinDragScale,
+} from './variables';
 import isTouchDevice from './utils/isTouchDevice';
 import { limitNumber } from './utils/limitTarget';
 import useIsomorphicLayoutEffect from './hooks/useIsomorphicLayoutEffect';
@@ -103,7 +110,7 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
     onClose,
     afterClose,
     portalContainer,
-    minDragScale = 0.1,
+    minDragScale = defaultMinDragScale,
   } = props;
 
   const [state, updateState] = useSetState(initialState);

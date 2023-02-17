@@ -31,7 +31,7 @@ import './PhotoBox.less';
 
 export interface PhotoBoxProps {
   /** 拖拽模式最小缩放 */
-  minDragScale?: number;
+  minDragScale: number;
   /** 拖拽模式 */
   isDragMode?: boolean;
   // 图片信息
@@ -126,7 +126,7 @@ const initialState = {
 
 export default function PhotoBox({
   isDragMode = true,
-  minDragScale = 0.1,
+  minDragScale,
   item: { src, render, width: customWidth = 0, height: customHeight = 0, originRef },
   visible,
   speed,

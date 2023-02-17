@@ -57,3 +57,8 @@ export const scaleBuffer = 0.2;
  * 最大等待动画时间
  */
 export const maxWaitAnimationTime = 250;
+
+/**
+ * 默认最小缩放
+ */
+export const defaultMinDragScale = 0.3;
