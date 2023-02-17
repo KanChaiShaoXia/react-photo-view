@@ -99,6 +99,8 @@ export interface PhotoProviderBase {
    * @defaultValue document.body
    */
   portalContainer?: HTMLElement;
+  /** 最小缩放比例 */
+  minDragScale?: number;
 }
 
 export type PhotoRenderParams = {

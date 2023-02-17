@@ -31,6 +31,8 @@ export interface IPhotoSliderProps extends PhotoProviderBase {
   onClose: (evt?: React.MouseEvent | React.TouchEvent) => void;
   // 关闭动画结束后回调
   afterClose?: () => void;
+  /** 最小缩放比例 */
+  minDragScale?: number;
 }
 
 type PhotoSliderState = {
@@ -101,6 +103,7 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
     onClose,
     afterClose,
     portalContainer,
+    minDragScale = 0.1,
   } = props;
 
   const [state, updateState] = useSetState(initialState);
@@ -391,6 +394,7 @@ export default function PhotoSlider(props: IPhotoSliderProps) {
 
         return (
           <PhotoBox
+            minDragScale={minDragScale}
             key={enableLoop ? `${item.key}/${item.src}/${nextIndex}` : item.key}
             item={item}
             speed={currentSpeed}
