@@ -124,27 +124,29 @@ const initialState = {
   reach: undefined as ReachType,
 };
 
-export default function PhotoBox({
-  isDragMode = true,
-  minDragScale,
-  item: { src, render, width: customWidth = 0, height: customHeight = 0, originRef },
-  visible,
-  speed,
-  easing,
-  wrapClassName,
-  className,
-  style,
-  loadingElement,
-  brokenElement,
+export default function PhotoBox(props: PhotoBoxProps) {
+  const {
+    isDragMode = true,
+    minDragScale,
+    item,
+    visible,
+    speed,
+    easing,
+    wrapClassName,
+    className,
+    style,
+    loadingElement,
+    brokenElement,
 
-  onPhotoTap,
-  onMaskTap,
-  onReachMove,
-  onReachUp,
-  onPhotoResize,
-  isActive,
-  expose,
-}: PhotoBoxProps) {
+    onPhotoTap,
+    onMaskTap,
+    onReachMove,
+    onReachUp,
+    onPhotoResize,
+    isActive,
+    expose,
+  } = props;
+  const { src, render, width: customWidth = 0, height: customHeight = 0, originRef } = item;
   const [state, updateState] = useSetState(initialState);
   const initialTouchRef = useRef<TouchStartType>(0);
   const mounted = useMountedRef();
@@ -428,6 +430,7 @@ export default function PhotoBox({
   const transitionCSS = `transform ${speed}ms ${easing}`;
 
   const attrs = {
+    ...(item.attrs || {}),
     className,
     onMouseDown: isTouchDevice ? undefined : handleMouseDown,
     onTouchStart: isTouchDevice ? handleTouchStart : undefined,

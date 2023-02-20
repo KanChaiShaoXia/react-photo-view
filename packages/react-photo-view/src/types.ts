@@ -32,6 +32,10 @@ export interface DataType {
    * 触发 ref
    */
   originRef?: React.MutableRefObject<HTMLElement | null>;
+  /**
+   * 图片标签额外信息
+   */
+  attrs?: React.HTMLAttributes<HTMLElement>;
 }
 
 export interface PhotoProviderBase {
