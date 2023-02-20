@@ -35,7 +35,7 @@ export interface DataType {
   /**
    * 图片标签额外信息
    */
-  attrs?: React.HTMLAttributes<HTMLElement>;
+  attrs?: JSX.IntrinsicElements['img'];
 }
 
 export interface PhotoProviderBase {
