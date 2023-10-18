@@ -453,8 +453,23 @@ export default function PhotoBox(props: PhotoBoxProps) {
     <div
       className={`PhotoView__PhotoWrap${wrapClassName ? ` ${wrapClassName}` : ''}`}
       style={style}
-      onMouseDown={!isTouchDevice && isActive ? handleMaskStart : undefined}
-      onTouchStart={isTouchDevice && isActive ? (e) => handleMaskStart(e.touches[0]) : undefined}
+      onMouseDown={(e) => {
+        if (!isTouchDevice && isActive) {
+          handleMaskStart(e);
+          e.stopPropagation();
+          e.preventDefault();
+        }
+      }}
+      onPointerDownCapture={(e) => {
+        e.stopPropagation();
+      }}
+      onTouchStart={(e) => {
+        if (isTouchDevice && isActive) {
+          handleMaskStart(e.touches[0]);
+          e.stopPropagation();
+          e.preventDefault();
+        }
+      }}
     >
       <div
         className="PhotoView__PhotoBox"
