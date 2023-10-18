@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 export default function PreventScroll() {
   useEffect(() => {
@@ -11,5 +11,13 @@ export default function PreventScroll() {
     };
   }, []);
 
-  return null;
+  return (
+    <div
+      onPointerDown={(e) => e.preventDefault()}
+      style={{
+        inset: 0,
+        position: 'absolute',
+      }}
+    />
+  );
 }
